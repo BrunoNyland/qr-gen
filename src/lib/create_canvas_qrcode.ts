@@ -50,9 +50,9 @@ const draw_eye_shape = (ctx: CanvasRenderingContext2D, shape: string, x: number,
         ctx.moveTo(x + s, y + r);
         ctx.arc(x + r, y + r, r, 0, 2 * Math.PI);
     } else if (shape === 'triangle') {
-        ctx.moveTo(x + s / 2, y);
-        ctx.lineTo(x + s, y + s);
-        ctx.lineTo(x, y + s);
+        ctx.moveTo(x + s / 2, y + s * 0.05);
+        ctx.lineTo(x + s * 0.85, y + s * 0.75);
+        ctx.lineTo(x + s * 0.15, y + s * 0.75);
         ctx.closePath();
     } else if (shape === 'diamond') {
         ctx.moveTo(x + s / 2, y);

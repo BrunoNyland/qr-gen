@@ -10,7 +10,7 @@ const get_eye_path = (shape: string, x: number, y: number, s: number): string =>
         const cx = rndVal(x + s / 2);
         return `M${cx},${rndVal(y)} A${r},${r} 0 1 1 ${cx - 0.01},${rndVal(y)} Z`;
     } else if (shape === 'triangle') {
-        return `M${rndVal(x + s / 2)},${rndVal(y)} L${rndVal(x + s)},${rndVal(y + s)} L${rndVal(x)},${rndVal(y + s)} Z`;
+        return `M${rndVal(x + s / 2)},${rndVal(y + s * 0.05)} L${rndVal(x + s * 0.85)},${rndVal(y + s * 0.75)} L${rndVal(x + s * 0.15)},${rndVal(y + s * 0.75)} Z`;
     } else if (shape === 'diamond') {
         return `M${rndVal(x + s / 2)},${rndVal(y)} L${rndVal(x + s)},${rndVal(y + s / 2)} L${rndVal(x + s / 2)},${rndVal(y + s)} L${rndVal(x)},${rndVal(y + s / 2)} Z`;
     } else if (shape === 'star') {
