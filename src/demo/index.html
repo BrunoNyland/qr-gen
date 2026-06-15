@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>qr-gen - Modern Dynamic QR Codes</title>
+    <meta name="description" content="Demo for qr-gen - dynamically generated QR codes for modern browsers.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <!-- Load the compiled library from the dist folder -->
+    <script src="../../dist/qr-gen.min.js"></script>
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <div class="app-layout">
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="logo-icon">▢</span>
+                <h1>qr-gen</h1>
+                <span class="version-tag">v0.10.0</span>
+            </div>
+            <p class="subtitle">Dynamically generated QR codes for modern web applications</p>
+            <div class="header-links">
+                <a href="https://github.com/brunonyland/qr-gen" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <!-- Sidebar Controls -->
+            <section class="playground-controls">
+                <div class="control-group">
+                    <h2>Render Settings</h2>
+                    
+                    <div class="control-row">
+                        <label for="render">Render Mode</label>
+                        <select id="render">
+                            <option value="canvas">Canvas</option>
+                            <option value="image" selected>Image (PNG)</option>
+                            <option value="svg">SVG (Vector)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-row">
+                        <label for="crisp">Crisp (Pixel Perfect)</label>
+                        <select id="crisp">
+                            <option value="true" selected>True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h2>Core Options</h2>
+                    
+                    <div class="control-row">
+                        <label for="text">QR Code Text</label>
+                        <textarea id="text">https://github.com/brunonyland/qr-gen</textarea>
+                    </div>
+
+                    <div class="control-row">
+                        <label for="size">Size: <span id="val-size">400</span>px</label>
+                        <input id="size" type="range" value="400" min="100" max="1000" step="10">
+                    </div>
+
+                    <div class="control-row half">
+                        <div>
+                            <label for="fill">Fill Color</label>
+                            <div class="color-picker-wrapper">
+                                <input id="fill" type="color" value="#0f172a">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="back">Background</label>
+                            <div class="color-picker-wrapper">
+                                <input id="back" type="color" value="#ffffff">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h2>Design & Layout</h2>
+
+                    <div class="control-row">
+                        <label for="rounded">Rounded Corners: <span id="val-rounded">100</span>%</label>
+                        <input id="rounded" type="range" value="100" min="0" max="100" step="5">
+                    </div>
+
+                    <div class="control-row">
+                        <label for="quiet">Quiet Zone: <span id="val-quiet">1</span> modules</label>
+                        <input id="quiet" type="range" value="1" min="0" max="4" step="1">
+                    </div>
+
+                    <div class="control-row">
+                        <label for="minversion">Min QR Version: <span id="val-minversion">1</span></label>
+                        <input id="minversion" type="range" value="1" min="1" max="10" step="1">
+                    </div>
+
+                    <div class="control-row">
+                        <label for="eclevel">Error Correction Level</label>
+                        <select id="eclevel">
+                            <option value="L">L - Low (7%)</option>
+                            <option value="M">M - Medium (15%)</option>
+                            <option value="Q">Q - Quartile (25%)</option>
+                            <option value="H" selected>H - High (30%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h2>Gradients & Finders</h2>
+                    
+                    <div class="control-row checkbox-row">
+                        <input id="use-gradient" type="checkbox">
+                        <label for="use-gradient">Enable Gradient Fill</label>
+                    </div>
+
+                    <div class="gradient-fields" style="display: none;">
+                        <div class="control-row half">
+                            <div>
+                                <label for="grad-color1">Color 1</label>
+                                <div class="color-picker-wrapper">
+                                    <input id="grad-color1" type="color" value="#3b82f6">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="grad-color2">Color 2</label>
+                                <div class="color-picker-wrapper">
+                                    <input id="grad-color2" type="color" value="#8b5cf6">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-row">
+                            <label for="grad-type">Gradient Type</label>
+                            <select id="grad-type">
+                                <option value="linear" selected>Linear</option>
+                                <option value="radial">Radial</option>
+                            </select>
+                        </div>
+
+                        <div class="control-row grad-angle-row">
+                            <label for="grad-angle">Angle: <span id="val-grad-angle">90</span>°</label>
+                            <input id="grad-angle" type="range" value="90" min="0" max="360" step="5">
+                        </div>
+                    </div>
+
+                    <div class="control-row">
+                        <label for="finder-shape">Finder Pattern Shape</label>
+                        <select id="finder-shape">
+                            <option value="" selected>Default (Same as Rounded)</option>
+                            <option value="square">Square</option>
+                            <option value="circle">Circle</option>
+                        </select>
+                    </div>
+
+                    <div class="control-row">
+                        <label for="finder-eye-shape">Finder Eye Shape (Center)</label>
+                        <select id="finder-eye-shape">
+                            <option value="" selected>Default (Same as Frame)</option>
+                            <option value="square">Square</option>
+                            <option value="circle">Circle</option>
+                            <option value="triangle">Triangle</option>
+                            <option value="diamond">Diamond</option>
+                            <option value="star">Star</option>
+                            <option value="heart">Heart</option>
+                        </select>
+                    </div>
+
+                    <div class="control-row checkbox-row">
+                        <input id="use-finder-color" type="checkbox">
+                        <label for="use-finder-color">Custom Finder Color</label>
+                    </div>
+
+                    <div class="finder-color-fields" style="display: none;">
+                        <div class="control-row">
+                            <label for="finder-color">Finder Color</label>
+                            <div class="color-picker-wrapper">
+                                <input id="finder-color" type="color" value="#ef4444">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h2>Overlay Mode</h2>
+                    
+                    <div class="control-row">
+                        <label for="mode">Overlay Mode</label>
+                        <select id="mode">
+                            <option value="plain">None</option>
+                            <option value="label" selected>Label (Text)</option>
+                            <option value="image">Image (Logo)</option>
+                        </select>
+                    </div>
+
+                    <div class="overlay-fields-label">
+                        <div class="control-row">
+                            <label for="label">Label Text</label>
+                            <input id="label" type="text" value="qr-gen">
+                        </div>
+
+                        <div class="control-row">
+                            <label for="font">Font Family</label>
+                            <input id="font" type="text" value="Space Grotesk">
+                        </div>
+
+                        <div class="control-row">
+                            <label for="fontcolor">Font Color</label>
+                            <div class="color-picker-wrapper">
+                                <input id="fontcolor" type="color" value="#3b82f6">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overlay-fields-image" style="display: none;">
+                        <div class="control-row">
+                            <label for="image">Upload Logo</label>
+                            <input id="image" type="file" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="overlay-shared">
+                        <div class="control-row">
+                            <label for="msize">Overlay Size: <span id="val-msize">20</span>%</label>
+                            <input id="msize" type="range" value="20" min="5" max="40" step="1">
+                        </div>
+
+                        <div class="control-row">
+                            <label for="mposx">Overlay X Pos: <span id="val-mposx">50</span>%</label>
+                            <input id="mposx" type="range" value="50" min="0" max="100" step="1">
+                        </div>
+
+                        <div class="control-row">
+                            <label for="mposy">Overlay Y Pos: <span id="val-mposy">50</span>%</label>
+                            <input id="mposy" type="range" value="50" min="0" max="100" step="1">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Panel -->
+            <section class="playground-preview">
+                <div class="preview-card-glow"></div>
+                <div class="preview-card">
+                    <div class="preview-header">
+                        <span class="preview-dot"></span>
+                        <span class="preview-title">Live Preview</span>
+                    </div>
+                    <div class="preview-container">
+                        <div id="container"></div>
+                    </div>
+                    <div class="preview-actions">
+                        <button id="btn-download" class="action-btn">Download QR Code</button>
+                        <button id="btn-copy-svg" class="action-btn secondary">Copy SVG String</button>
+                        <button id="btn-copy-dataurl" class="action-btn secondary">Copy Base64 DataURL</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Hidden images for buffer/uploading -->
+    <img id="img-buffer" src="dummy.png" alt="Buffer Image" style="display: none;">
+</body>
+</html>

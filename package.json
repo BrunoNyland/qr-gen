@@ -1,0 +1,39 @@
+{
+  "name": "qr-gen",
+  "version": "1.0.0",
+  "description": "Dynamically generated QR codes for modern browsers.",
+  "author": "Bruno Nyland <contato@brunonyland.com> (https://brunonyland.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brunonyland/qr-gen.git"
+  },
+  "main": "dist/qr-gen.cjs",
+  "module": "dist/qr-gen.esm.js",
+  "browser": "dist/qr-gen.min.js",
+  "types": "dist/qr-gen.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/qr-gen.d.ts",
+      "import": "./dist/qr-gen.esm.js",
+      "require": "./dist/qr-gen.cjs",
+      "default": "./dist/qr-gen.min.js"
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "eslint": "^10.5.0",
+    "globals": "^17.6.0",
+    "jsdom": "^29.1.1",
+    "qrcode-generator": "^2.0.4",
+    "tsup": "^8.5.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.61.0",
+    "vitest": "^4.1.8"
+  }
+}
