@@ -1,5 +1,5 @@
 {
-  "name": "qr-gen",
+  "name": "@brunonyland/qr-gen",
   "version": "1.0.0",
   "files": [
     "dist"

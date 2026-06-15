@@ -1,7 +1,7 @@
 # qr-gen
 
-[![NPM Version](https://img.shields.io/npm/v/qr-gen.svg)](https://www.npmjs.com/package/qr-gen)
-[![License](https://img.shields.io/npm/l/qr-gen.svg)](https://github.com/BrunoNyland/qr-gen/blob/main/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/@brunonyland/qr-gen.svg)](https://www.npmjs.com/package/@brunonyland/qr-gen)
+[![License](https://img.shields.io/npm/l/@brunonyland/qr-gen.svg)](https://github.com/BrunoNyland/qr-gen/blob/main/LICENSE)
 
 A powerful, zero-dependency, and highly customizable QR Code generator for modern browsers and Node.js. A modern, optimized reimplementation of the `kjua` library, offering rich aesthetic features like linear/radial gradients, custom finder shapes, custom finder eye styles (cHearts, Stars, Triangles, etc.), text/image overlays, and full server-side rendering (SSR) compatibility.
 
@@ -31,7 +31,7 @@ A powerful, zero-dependency, and highly customizable QR Code generator for moder
 ## Installation
 
 ```bash
-npm install qr-gen
+npm install @brunonyland/qr-gen
 ```
 
 ---
@@ -57,7 +57,7 @@ Include the script from `dist` or a CDN, then use `window.qrGen`:
 ### ESM / Bundlers
 
 ```javascript
-import qrGen from 'qr-gen';
+import qrGen from '@brunonyland/qr-gen';
 
 const qr = qrGen({
     text: "https://github.com/BrunoNyland/qr-gen",
@@ -146,7 +146,7 @@ const qr = qrGen({
 To use `qr-gen` in a Node.js backend environment (without a window/document DOM), inject a canvas factory (e.g. from the `canvas` package) and use the utility string output methods:
 
 ```javascript
-import qrGen from 'qr-gen';
+import qrGen from '@brunonyland/qr-gen';
 import { createCanvas } from 'canvas';
 
 // 1. Get Base64 PNG Data URL
