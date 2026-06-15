@@ -143,12 +143,37 @@ const create_path = (qr: QRCodeResult | null, settings: RequiredQrGenOptions, dr
         ctx.o = Math.floor((settings.size - mod_size * mod_count) / 2);
     }
 
+    if (drawFinder && settings.finderShape === 'circle') {
+        const offset = ctx.o;
+        const quiet = settings.quiet;
+        const finders = [
+            {col: quiet, row: quiet},
+            {col: mod_count - quiet - 7, row: quiet},
+            {col: quiet, row: mod_count - quiet - 7}
+        ];
+        let pathStr = '';
+        finders.forEach(f => {
+            const x_start = offset + f.col * mod_size;
+            const y_start = offset + f.row * mod_size;
+
+            const r_out = rnd(3.5 * mod_size);
+            const r_in = rnd(2.5 * mod_size);
+            const cx_val = rnd(x_start + 3.5 * mod_size);
+            const y_out = rnd(y_start);
+            const y_in = rnd(y_start + mod_size);
+
+            // Outer circle (clockwise)
+            pathStr += `M${cx_val},${y_out} A${r_out},${r_out} 0 1 1 ${cx_val - 0.01},${y_out} Z`;
+            // Inner circle (counter-clockwise)
+            pathStr += ` M${cx_val},${y_in} A${r_in},${r_in} 0 1 0 ${cx_val - 0.01},${y_in} Z `;
+        });
+        return pathStr.trim();
+    }
+
     const cellSettings = Object.assign({}, settings);
     if (drawFinder) {
         if (settings.finderShape === 'square') {
             cellSettings.rounded = 0;
-        } else if (settings.finderShape === 'circle') {
-            cellSettings.rounded = 100;
         }
     }
 

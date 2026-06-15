@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>qr-gen - Modern Dynamic QR Codes</title>
@@ -7,19 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <!-- Load the compiled library from the dist folder -->
     <script src="../../dist/qr-gen.min.js"></script>
     <script src="scripts.js" defer></script>
 </head>
+
 <body>
     <div class="app-layout">
         <header class="app-header">
             <div class="logo-area">
                 <span class="logo-icon">▢</span>
                 <h1>qr-gen</h1>
-                <span class="version-tag">v0.10.0</span>
+                <span class="version-tag">v1.0.0</span>
             </div>
             <p class="subtitle">Dynamically generated QR codes for modern web applications</p>
             <div class="header-links">
@@ -32,7 +36,7 @@
             <section class="playground-controls">
                 <div class="control-group">
                     <h2>Render Settings</h2>
-                    
+
                     <div class="control-row">
                         <label for="render">Render Mode</label>
                         <select id="render">
@@ -53,7 +57,7 @@
 
                 <div class="control-group">
                     <h2>Core Options</h2>
-                    
+
                     <div class="control-row">
                         <label for="text">QR Code Text</label>
                         <textarea id="text">https://github.com/brunonyland/qr-gen</textarea>
@@ -111,7 +115,7 @@
 
                 <div class="control-group">
                     <h2>Gradients & Finders</h2>
-                    
+
                     <div class="control-row checkbox-row">
                         <input id="use-gradient" type="checkbox">
                         <label for="use-gradient">Enable Gradient Fill</label>
@@ -186,7 +190,7 @@
 
                 <div class="control-group">
                     <h2>Overlay Mode</h2>
-                    
+
                     <div class="control-row">
                         <label for="mode">Overlay Mode</label>
                         <select id="mode">
@@ -265,4 +269,5 @@
     <!-- Hidden images for buffer/uploading -->
     <img id="img-buffer" src="dummy.png" alt="Buffer Image" style="display: none;">
 </body>
+
 </html>

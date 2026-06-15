@@ -135,15 +135,33 @@ const draw_modules = (qr: QRCodeResult | null, ctx: CanvasRenderingContext2D, se
     const cellSettings = Object.assign({}, settings);
     if (settings.finderShape === 'square') {
         cellSettings.rounded = 0;
-    } else if (settings.finderShape === 'circle') {
-        cellSettings.rounded = 100;
     }
-    const finderDrawModule = cellSettings.rounded > 0 && cellSettings.rounded <= 100 ? draw_module_rounded : draw_module_default;
 
-    for (let row = 0; row < mod_count; row += 1) {
-        for (let col = 0; col < mod_count; col += 1) {
-            if (isFinderPattern(row, col, mod_count, settings.quiet) && !isFinderEye(row, col, mod_count, settings.quiet)) {
-                finderDrawModule(qr, ctx, cellSettings, mod_size, row, col);
+    if (settings.finderShape === 'circle') {
+        const quiet = settings.quiet;
+        const finders = [
+            {col: quiet, row: quiet},
+            {col: mod_count - quiet - 7, row: quiet},
+            {col: quiet, row: mod_count - quiet - 7}
+        ];
+        finders.forEach(f => {
+            const x_center = (f.col + 3.5) * mod_size;
+            const y_center = (f.row + 3.5) * mod_size;
+            const R_outer = 3.5 * mod_size;
+            const R_inner = 2.5 * mod_size;
+
+            ctx.moveTo(x_center + R_outer, y_center);
+            ctx.arc(x_center, y_center, R_outer, 0, 2 * Math.PI, false);
+            ctx.moveTo(x_center + R_inner, y_center);
+            ctx.arc(x_center, y_center, R_inner, 0, 2 * Math.PI, true);
+        });
+    } else {
+        const finderDrawModule = cellSettings.rounded > 0 && cellSettings.rounded <= 100 ? draw_module_rounded : draw_module_default;
+        for (let row = 0; row < mod_count; row += 1) {
+            for (let col = 0; col < mod_count; col += 1) {
+                if (isFinderPattern(row, col, mod_count, settings.quiet) && !isFinderEye(row, col, mod_count, settings.quiet)) {
+                    finderDrawModule(qr, ctx, cellSettings, mod_size, row, col);
+                }
             }
         }
     }
