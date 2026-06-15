@@ -1,6 +1,9 @@
 {
   "name": "qr-gen",
   "version": "1.0.0",
+  "files": [
+    "dist"
+  ],
   "description": "Dynamically generated QR codes for modern browsers.",
   "author": "Bruno Nyland <contato@brunonyland.com> (https://brunonyland.com)",
   "license": "MIT",
