@@ -3,7 +3,7 @@
     const doc = win.document;
     const qrGen = win.qrGen;
 
-    const rangeInputs = ['size', 'rounded', 'quiet', 'minversion', 'msize', 'mposx', 'mposy', 'grad-angle'];
+    const rangeInputs = ['size', 'rounded', 'quiet', 'minversion', 'msize', 'mposx', 'mposy', 'grad-angle', 'label-stroke-width'];
 
     function elById(id) {
         return doc.getElementById(id);
@@ -100,6 +100,8 @@
             label: valById('label'),
             fontname: valById('font'),
             fontcolor: valById('fontcolor'),
+            labelStrokeColor: valById('label-stroke-color'),
+            labelStrokeWidth: parseFloat(valById('label-stroke-width')),
             image: elById('img-buffer'),
             finderShape: valById('finder-shape') || null,
             finderEyeShape: valById('finder-eye-shape') || null,
