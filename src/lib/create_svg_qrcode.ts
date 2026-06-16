@@ -8,7 +8,8 @@ const get_eye_path = (shape: string, x: number, y: number, s: number): string =>
     if (shape === 'circle') {
         const r = rndVal(s / 2);
         const cx = rndVal(x + s / 2);
-        return `M${cx},${rndVal(y)} A${r},${r} 0 1 1 ${cx - 0.01},${rndVal(y)} Z`;
+        const cy = rndVal(y + s / 2);
+        return `M${cx - r},${cy} A${r},${r} 0 0 1 ${cx + r},${cy} A${r},${r} 0 0 1 ${cx - r},${cy} Z`;
     } else if (shape === 'triangle') {
         return `M${rndVal(x + s / 2)},${rndVal(y + s * 0.05)} L${rndVal(x + s * 0.85)},${rndVal(y + s * 0.75)} L${rndVal(x + s * 0.15)},${rndVal(y + s * 0.75)} Z`;
     } else if (shape === 'diamond') {
@@ -158,14 +159,13 @@ const create_path = (qr: QRCodeResult | null, settings: RequiredQrGenOptions, dr
 
             const r_out = rnd(3.5 * mod_size);
             const r_in = rnd(2.5 * mod_size);
-            const cx_val = rnd(x_start + 3.5 * mod_size);
-            const y_out = rnd(y_start);
-            const y_in = rnd(y_start + mod_size);
+            const cx = rnd(x_start + 3.5 * mod_size);
+            const cy = rnd(y_start + 3.5 * mod_size);
 
-            // Outer circle (clockwise)
-            pathStr += `M${cx_val},${y_out} A${r_out},${r_out} 0 1 1 ${cx_val - 0.01},${y_out} Z`;
-            // Inner circle (counter-clockwise)
-            pathStr += ` M${cx_val},${y_in} A${r_in},${r_in} 0 1 0 ${cx_val - 0.01},${y_in} Z `;
+            // Outer circle (clockwise): two semi-circles
+            pathStr += `M${cx - r_out},${cy} A${r_out},${r_out} 0 0 1 ${cx + r_out},${cy} A${r_out},${r_out} 0 0 1 ${cx - r_out},${cy} Z`;
+            // Inner circle (counter-clockwise): two semi-circles
+            pathStr += ` M${cx - r_in},${cy} A${r_in},${r_in} 0 0 0 ${cx + r_in},${cy} A${r_in},${r_in} 0 0 0 ${cx - r_in},${cy} Z `;
         });
         return pathStr.trim();
     }
