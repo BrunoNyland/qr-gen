@@ -1,6 +1,6 @@
 {
   "name": "@brunonyland/qr-gen",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "files": [
     "dist"
   ],
@@ -35,8 +35,11 @@
     "jsdom": "^29.1.1",
     "qrcode-generator": "^2.0.4",
     "tsup": "^8.5.1",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.61.0",
-    "vitest": "^4.1.8"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1",
+    "vitest": "^4.1.9"
+  },
+  "overrides": {
+    "esbuild": "0.28.1"
   }
 }
